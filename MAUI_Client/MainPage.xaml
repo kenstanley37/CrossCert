@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CrossCert.ViewModels"
+             xmlns:models="clr-namespace:CrossCert.Models"
+             xmlns:converters="clr-namespace:CrossCert.Converters"
+             xmlns:local="clr-namespace:CrossCert"
+             x:DataType="viewmodels:MainPageViewModel"
+             x:Class="CrossCert.MainPage"
+             Title="Domain Dashboard"
+             Shell.NavBarIsVisible="True"
+             BackgroundColor="{StaticResource AppBackground}">
+
+    <ContentPage.Resources>
+        <!-- Converters for showing/hiding the list and empty state based on domain count -->
+        <converters:CountToBoolConverter x:Key="CountToBoolConverter" />
+        <converters:CountToInverseBoolConverter x:Key="CountToInverseBoolConverter" />
+    </ContentPage.Resources>
+
+    <!--
+        RefreshView enables the "pull-to-refresh" gesture, binding to the LoadDomainsCommand.
+        IsRefreshing is bound to the ViewModel's IsRefreshing property to show the spinner.
+    -->
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadDomainsCommand}">
+        <Grid RowDefinitions="Auto, *">
+
+            <!-- Header/Instructions -->
+            <VerticalStackLayout Grid.Row="0" Spacing="0" Padding="15, 15, 15, 0" MaximumWidthRequest="800" HorizontalOptions="Center">
+                <Label 
+                    Text="Managed Certificates" 
+                    FontSize="Title" 
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource Primary}" 
+                    HorizontalOptions="Center" 
+                    Margin="0, 0, 0, 5"/>
+                <Label 
+                    Text="Overview of all domains and their current SSL certificate status." 
+                    FontSize="Small" 
+                    TextColor="{StaticResource Gray400}" 
+                    HorizontalOptions="Center" 
+                    Margin="0, 0, 0, 20"/>
+            </VerticalStackLayout>
+
+            <!-- Main Content Area: Domain List or Empty State -->
+            <ScrollView Grid.Row="1">
+                <VerticalStackLayout Padding="15, 0, 15, 15" MaximumWidthRequest="800" HorizontalOptions="CenterAndExpand">
+
+                    <!-- Empty State View: Visible when Domains.Count is 0 -->
+                    <VerticalStackLayout 
+                        IsVisible="{Binding Domains.Count, Converter={StaticResource CountToInverseBoolConverter}}"
+                        HorizontalOptions="Center" 
+                        VerticalOptions="CenterAndExpand"
+                        Padding="40"
+                        Spacing="10"
+                        Margin="0, 80, 0, 0">
+                        <Image Source="empty_state_icon.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" />
+                        <Label 
+                            Text="No Domains Added" 
+                            FontSize="Large" 
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource Gray400}" 
+                            HorizontalOptions="Center" />
+                        <Label 
+                            Text="Use the '+' button in the toolbar to add your first domain for certificate management." 
+                            FontSize="Default" 
+                            TextColor="{StaticResource Gray500}"
+                            HorizontalTextAlignment="Center"
+                            HorizontalOptions="Center" 
+                            MaximumWidthRequest="300" />
+                    </VerticalStackLayout>
+
+
+                    <!-- Domain List CollectionView: Visible when Domains.Count > 0 -->
+                    <CollectionView 
+                        x:Name="DomainCollectionView"
+                        ItemsSource="{Binding Domains}"
+                        SelectionMode="None"
+                        IsVisible="{Binding Domains.Count, Converter={StaticResource CountToBoolConverter}}"
+                        Margin="0, 0, 0, 20">
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+
+                        <!-- Item Template for each Domain card -->
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Domain">
+                                <Border Style="{StaticResource CardStyle}">
+                                    <Border.GestureRecognizers>
+                                        <!-- TODO: Command for viewing/editing domain details -->
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+
+                                    <Grid Padding="15" ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto, Auto" RowSpacing="5">
+
+                                        <!-- Domain Name and Status (Row 0) -->
+                                        <Label Grid.Row="0" Grid.Column="0"
+                                               Text="{Binding Name}" 
+                                               FontSize="Medium" 
+                                               FontAttributes="Bold"
+                                               TextColor="{AppThemeBinding Light={StaticResource DarkText}, Dark={StaticResource White}}" 
+                                               VerticalOptions="Center" />
+
+                                        <!-- Status Indicator Placeholder (Row 0, Col 1) -->
+                                        <Frame Grid.Row="0" Grid.Column="1" 
+                                               Padding="5" 
+                                               CornerRadius="10"
+                                               BackgroundColor="{StaticResource Magenta}"
+                                               HasShadow="False"
+                                               VerticalOptions="Center">
+                                            <Label Text="Active" 
+                                                   FontSize="Micro" 
+                                                   TextColor="{StaticResource White}"
+                                                   FontAttributes="Bold"/>
+                                        </Frame>
+
+                                        <!-- SANs (Row 1) -->
+                                        <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                                            <Label Text="SANs:" 
+                                                   FontSize="Caption" 
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource Gray600}" />
+                                            <Label Text="{Binding SubjectAlternativeNames, StringFormat='{0}'}" 
+                                                   FontSize="Caption" 
+                                                   TextColor="{StaticResource Gray400}" 
+                                                   LineBreakMode="TailTruncation"/>
+                                        </HorizontalStackLayout>
+
+                                        <!-- Renewal Date (Row 2) -->
+                                        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                                            <Label Text="Next Renewal:" 
+                                                   FontSize="Caption" 
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource Gray600}" />
+                                            <Label Text="{Binding NextRenewalAttempt, StringFormat='{0:MMM dd, yyyy}'}" 
+                                                   FontSize="Caption" 
+                                                   TextColor="{StaticResource PrimaryDark}" />
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+    </RefreshView>
+</ContentPage>
