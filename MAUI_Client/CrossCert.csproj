@@ -61,6 +61,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Certes" Version="3.0.4" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="12.2.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		  <PrivateAssets>all</PrivateAssets>

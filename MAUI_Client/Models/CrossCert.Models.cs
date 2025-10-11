@@ -72,14 +72,68 @@ namespace CrossCert.Models
         [ForeignKey(nameof(DnsCredentialId))]
         public virtual DnsCredentials? DnsCredentials { get; set; }
 
+        // --- Calculated Display Properties for UI ---
+
         /// <summary>
-        /// Calculated property to determine the status of the domain/certificate.
-        /// This should be determined by business logic (e.g., ExpiryDate < 30 days = 'Expiring').
+        /// Provides a human-readable status text for the certificate health.
+        /// </summary>
+        [NotMapped] // Tell EF Core not to map this property to a database column
+        public string StatusText
+        {
+            get
+            {
+                if (Certificate == null)
+                {
+                    // No certificate issued yet.
+                    return "Pending";
+                }
+
+                var daysUntilExpiration = (Certificate.ExpiryDate - DateTime.Today).Days;
+
+                if (daysUntilExpiration < 0)
+                {
+                    return "EXPIRED";
+                }
+                else if (daysUntilExpiration <= 30) // Standard warning period
+                {
+                    return "Expiring Soon";
+                }
+                else
+                {
+                    return "Active";
+                }
+            }
+        }
+
+        /// <summary>
+        /// Provides a color representation for the status for UI binding.
         /// </summary>
         [NotMapped]
-        public string Status => Certificate != null ?
-            (Certificate.ExpiryDate <= DateTime.Now.AddDays(30) ? "Expiring" : "Active") :
-            "Pending";
+        public Color StatusColor
+        {
+            get
+            {
+                if (Certificate == null)
+                {
+                    return Colors.DarkGray; // Pending
+                }
+
+                var daysUntilExpiration = (Certificate.ExpiryDate - DateTime.Today).Days;
+
+                if (daysUntilExpiration < 0)
+                {
+                    return Colors.Red; // Critical: Expired
+                }
+                else if (daysUntilExpiration <= 30)
+                {
+                    return Colors.Orange; // Warning: Expiring soon
+                }
+                else
+                {
+                    return Colors.Green; // Healthy
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -149,7 +203,7 @@ namespace CrossCert.Models
     /// <summary>
     /// Stores credentials used for DNS-01 challenges.
     /// </summary>
-    public class DnsCredentials // <-- NOW CORRECTLY PUBLIC
+    public class DnsCredentials
     {
         [Key]
         public int Id { get; set; }

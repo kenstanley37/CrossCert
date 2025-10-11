@@ -1,4 +1,5 @@
-﻿using CrossCert.Data;
+﻿using CommunityToolkit.Maui; // <--- ADDED
+using CrossCert.Data;
 using CrossCert.Services;
 using CrossCert.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,8 @@ namespace CrossCert
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                // Initialize the MAUI Community Toolkit here, chained to the main app setup.
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -34,14 +37,8 @@ namespace CrossCert
             builder.Services.AddSingleton<CertManagerDataService>();
 
             // Register View Models (Transient recommended for page lifecycle)
-            builder.Services.AddTransient<MainPageViewModel>(); // CRITICAL: This needs access to the public VM
-
-            // Register Pages
-            builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<AppShell>();
-
+            builder.Services.AddTransient<MainPageViewModel>(); // CRITICAL: This needs access to the publ...
             builder.Services.AddTransient<AddDomainPageViewModel>();
-
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -60,7 +57,7 @@ namespace CrossCert
         /// </summary>
         private static void CreateDatabase(IServiceProvider serviceProvider)
         {
-            // Using a service scope is necessary to resolve scoped services 
+            // Using a service scope is necessary to resolve scoped services
             // (like DbContext) outside of the main application request scope.
             using var scope = serviceProvider.CreateScope();
             var services = scope.ServiceProvider;
@@ -75,7 +72,7 @@ namespace CrossCert
             }
             catch (Exception ex)
             {
-                // Log the critical error if migrations fail. 
+                // Log the critical error if migrations fail.
                 Console.WriteLine($"[CRITICAL DB ERROR] Failed to apply migrations: {ex.Message}");
             }
         }
