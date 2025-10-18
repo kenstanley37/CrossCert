@@ -22,4 +22,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Company>Kenneth Stanley</Company>
+    <Product>CrossCert</Product>
+    <RepositoryUrl>https://github.com/kenstanley37/CrossCert</RepositoryUrl>
+    <PackageTags>certificates;cli;security</PackageTags>
+    <AssemblyTitle>CrossCert CLI</AssemblyTitle>
+    <AssemblyDescription>Secure certificate management CLI</AssemblyDescription>
+    <Authors>Kenneth Stanley</Authors>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+
 </Project>
