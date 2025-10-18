@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls">
+
+    <!-- Activity Indicator -->
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+    </Style>
+
+    <!-- Indicator View -->
+    <Style TargetType="IndicatorView">
+        <Setter Property="IndicatorColor" Value="{AppThemeBinding Light=#CCCCCC, Dark=#666666}" />
+        <Setter Property="SelectedIndicatorColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+    </Style>
+
+    <!-- Border -->
+    <Style TargetType="controls:Border">
+        <Setter Property="Stroke" Value="{AppThemeBinding Light=#CCCCCC, Dark=#444444}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="Rectangle" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+    <!-- BoxView -->
+    <Style TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F0F0F0, Dark=#2A2A2A}" />
+    </Style>
+
+    <!-- Button -->
+    <Style TargetType="Button">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#FFFFFF}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#007ACC, Dark=#2196F3}" />
+        <Setter Property="FontFamily" Value="OpenSansSemibold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
+    <!-- Entry -->
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#1A1A1A, Dark=#FFFFFF}" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light=#888888, Dark=#CCCCCC}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="ClearButtonVisibility" Value="WhileEditing" />
+    </Style>
+
+    <!-- Frame -->
+    <Style TargetType="Frame">
+        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light=#CCCCCC, Dark=#444444}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1A1A1A}" />
+    </Style>
+
+    <!-- Label -->
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#1A1A1A, Dark=#FFFFFF}" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.25" />
+    </Style>
+
+    <!-- Header Label -->
+    <Style TargetType="Label" x:Key="HeaderStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#007ACC, Dark=#4FC3F7}" />
+        <Setter Property="FontFamily" Value="OpenSansSemibold" />
+        <Setter Property="FontSize" Value="24" />
+    </Style>
+
+    <!-- Subtitle Label -->
+    <Style TargetType="Label" x:Key="SubtitleStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#666666, Dark=#CCCCCC}" />
+        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <!-- ListView -->
+    <Style TargetType="ListView">
+        <Setter Property="SeparatorColor" Value="{AppThemeBinding Light=#CCCCCC, Dark=#444444}" />
+        <Setter Property="SeparatorVisibility" Value="Default" />
+    </Style>
+
+    <!-- Picker -->
+    <Style TargetType="Picker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#1A1A1A, Dark=#FFFFFF}" />
+        <Setter Property="TitleColor" Value="{AppThemeBinding Light=#888888, Dark=#CCCCCC}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
+    <!-- ProgressBar -->
+    <Style TargetType="ProgressBar">
+        <Setter Property="ProgressColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+        <Setter Property="HeightRequest" Value="4" />
+    </Style>
+
+    <!-- RefreshView -->
+    <Style TargetType="RefreshView">
+        <Setter Property="RefreshColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+    </Style>
+
+    <!-- Slider -->
+    <Style TargetType="Slider">
+        <Setter Property="MinimumTrackColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+        <Setter Property="MaximumTrackColor" Value="{AppThemeBinding Light=#CCCCCC, Dark=#444444}" />
+        <Setter Property="ThumbColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+    </Style>
+
+    <!-- SwipeItemView -->
+    <Style TargetType="SwipeItemView">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <!-- Switch -->
+    <Style TargetType="Switch">
+        <Setter Property="OnColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+        <Setter Property="ThumbColor" Value="{AppThemeBinding Light=#CCCCCC, Dark=#CCCCCC}" />
+    </Style>
+
+    <!-- TimePicker -->
+    <Style TargetType="TimePicker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#1A1A1A, Dark=#FFFFFF}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
+    <!-- DatePicker -->
+    <Style TargetType="DatePicker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#1A1A1A, Dark=#FFFFFF}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HeightRequest" Value="44" />
+    </Style>
+
+    <!-- SearchBar -->
+    <Style TargetType="SearchBar">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#1A1A1A, Dark=#FFFFFF}" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light=#888888, Dark=#CCCCCC}" />
+        <Setter Property="CancelButtonColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F0F0F0, Dark=#2A2A2A}" />
+        <Setter Property="HeightRequest" Value="48" />
+    </Style>
+
+    <!-- WebView -->
+    <Style TargetType="WebView">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1A1A1A}" />
+    </Style>
+
+    <!-- Shell -->
+    <Style TargetType="Shell" x:Key="BaseShellStyle">
+        <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light=#1E1E1E, Dark=#1E1E1E}" />
+        <Setter Property="Shell.ForegroundColor" Value="#FFFFFF" />
+        <Setter Property="Shell.TitleColor" Value="#FFFFFF" />
+        <Setter Property="Shell.UnselectedColor" Value="#B0C4DE" />
+        <Setter Property="Shell.FlyoutBackgroundColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1A1A1A}" />
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1A1A1A}" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light=#888888, Dark=#CCCCCC}" />
+    </Style>
+
+    <!-- NavigationPage -->
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1A1A1A}" />
+        <Setter Property="BarTextColor" Value="{AppThemeBinding Light=#888888, Dark=#FFFFFF}" />
+        <Setter Property="IconColor" Value="{AppThemeBinding Light=#888888, Dark=#FFFFFF}" />
+    </Style>
+
+    <!-- TabbedPage -->
+    <Style TargetType="TabbedPage">
+        <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#1A1A1A}" />
+        <Setter Property="BarTextColor" Value="{AppThemeBinding Light=#007ACC, Dark=#FFFFFF}" />
+        <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light=#888888, Dark=#CCCCCC}" />
+        <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light=#1A1A1A, Dark=#FFFFFF}" />
+    </Style>
+
+</ResourceDictionary>
+       

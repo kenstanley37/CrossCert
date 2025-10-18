@@ -1,0 +1,50 @@
+<Shell
+    x:Class="CrossCert.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:CrossCert.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="CrossCert - Certificate Manager"
+    BackgroundColor="#003D73">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="#003D73" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.UnselectedColor" Value="#B0C4DE" />
+            </Style>
+            <Style BasedOn="{StaticResource BaseStyle}" TargetType="ShellItem" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <ShellContent
+        Title="Domain Dashboard"
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Route="MainPage" />
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="10,0" VerticalOptions="Center">
+            <Label 
+                Text="CrossCert Manager" 
+                TextColor="White" 
+                FontSize="22" 
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
+        </StackLayout>
+    </Shell.TitleView>
+
+    <Shell.ToolbarItems>
+        <ToolbarItem 
+            Text="Settings" 
+            IconImageSource="settings_icon.png" 
+            Clicked="OnSettingsClicked" 
+            Order="Primary" />
+        <ToolbarItem 
+            Text="About" 
+            IconImageSource="info_icon.png" 
+            Clicked="OnAboutClicked" 
+            Order="Secondary" />
+    </Shell.ToolbarItems>
+</Shell>

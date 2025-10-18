@@ -1,0 +1,33 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:GUI.ViewModels"
+             x:Class="GUI.Views.MainPage"
+             x:DataType="viewmodels:MainPageViewModel"
+             BackgroundColor="{StaticResource DarkBackground}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,12,20,20" Spacing="20">
+
+            <Border Stroke="Red" StrokeThickness="2">
+                <Label Text="Certificate Manager"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource PageTitleColor}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       Margin="0,0,0,8" />
+            </Border>
+
+
+            <!-- 🏷️ Page Header -->
+            
+
+            <!-- 🧾 Main Content -->
+            <!-- Managed Domains -->
+            <!-- Certificate Actions -->
+            <!-- Renewal Status -->
+            <!-- (Insert your Expander sections here) -->
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

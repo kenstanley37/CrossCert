@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GUI"
+    xmlns:views="clr-namespace:GUI.Views"
+    Title="GUI">
+
+    <ShellContent
+        Route="MainPage"
+        ContentTemplate="{DataTemplate views:MainPage}">
+
+        <Shell.TitleView>
+            <Grid HeightRequest="56"
+                  ColumnDefinitions="Auto,*,Auto"
+                  BackgroundColor="{StaticResource DarkBackground}"
+                  Padding="4"
+                  VerticalOptions="Center"
+                  >
+
+
+                <!-- Left: App Title -->
+                <Label Text="CrossCert"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource AccentColor}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+
+                <!-- Center: Toolbar Icons -->
+                <HorizontalStackLayout Grid.Column="1"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Spacing="12">
+                    <ImageButton Source="open.png"
+                         WidthRequest="24"
+                         HeightRequest="24"
+                         BackgroundColor="Transparent" />
+                    <ImageButton Source="save.png"
+                         WidthRequest="24"
+                         HeightRequest="24"
+                         BackgroundColor="Transparent" />
+                    <ImageButton Source="settings.png"
+                         WidthRequest="24"
+                         HeightRequest="24"
+                         BackgroundColor="Transparent" />
+                </HorizontalStackLayout>
+
+                <!-- Right: Navigation Buttons -->
+                <HorizontalStackLayout Grid.Column="2"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Spacing="8">
+                    <Button Text="About"
+                    Command="{Binding ShowAboutCommand}"
+                    StyleClass="NavButton" />
+                    <Button Text="Settings"
+                    Command="{Binding ShowSettingsCommand}"
+                    StyleClass="NavButton" />
+                    <Button Text="Help"
+                    Command="{Binding ShowHelpCommand}"
+                    StyleClass="NavButton" />
+                </HorizontalStackLayout>
+            </Grid>
+        </Shell.TitleView>
+    </ShellContent>
+</Shell>
