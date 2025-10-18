@@ -10,6 +10,9 @@ namespace Core.Interfaces
 
         // 🆕 Add this for the `show` command
         Task<CertificateInfo?> GetCertificateAsync(string domain);
+        void AddDomain(Domain domain);
+        IEnumerable<Domain> GetDomains();
+        bool RemoveDomain(string domainName);
 
     }
 

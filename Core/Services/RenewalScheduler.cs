@@ -9,13 +9,55 @@ namespace Core.Services
         private readonly ILogger<RenewalScheduler> _logger;
         private readonly ICertificateManager _certManager;
         private readonly List<Domain> _scheduledDomains = [];
-
+        private readonly List<RenewalLog> _logs = new();
         public event EventHandler<RenewalLog>? RenewalCompleted;
 
         public RenewalScheduler(ICertificateManager certManager, ILogger<RenewalScheduler> logger)
         {
             _certManager = certManager;
             _logger = logger;
+        }
+
+        public IEnumerable<RenewalLog> GetRecentLogs()
+        {
+            var config = ConfigStore.Load();
+            return config.RenewalLogs.OrderByDescending(l => l.Timestamp).Take(20);
+        }
+
+
+        private void OnRenewalCompleted(RenewalLog log)
+        {
+            var config = ConfigStore.Load();
+            config.RenewalLogs.Add(log);
+            ConfigStore.Save(config);
+
+            RenewalCompleted?.Invoke(this, log);
+        }
+
+        public async Task RunAutoRenewalAsync()
+        {
+            var config = ConfigStore.Load();
+
+            if (!config.AutoRenew)
+            {
+                _logger.LogInformation("Auto-renew is disabled in config.");
+                return;
+            }
+
+            var now = DateTime.UtcNow;
+            var threshold = now.AddDays(config.RenewalIntervalDays);
+
+            foreach (var domain in config.Domains.Where(d => d.IsActive))
+            {
+                var cert = await _certManager.GetCertificateAsync(domain.DomainName);
+                if (cert == null || cert.ExpiryDate <= threshold)
+                {
+                    _logger.LogInformation("Scheduling auto-renewal for {Domain}", domain.DomainName);
+                    await ScheduleRenewalAsync(domain);
+                }
+            }
+
+            await RunManualRenewalAsync();
         }
 
         public Task ScheduleRenewalAsync(Domain domain)

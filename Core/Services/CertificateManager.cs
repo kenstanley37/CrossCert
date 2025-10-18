@@ -14,6 +14,45 @@ namespace Core.Services
             _logger = logger;
         }
 
+        public void AddDomain(Domain domain)
+        {
+            var config = ConfigStore.Load();
+
+            if (!config.Domains.Any(d => d.DomainName.Equals(domain.DomainName, StringComparison.OrdinalIgnoreCase)))
+            {
+                config.Domains.Add(domain);
+                ConfigStore.Save(config);
+                _logger.LogInformation("Domain {Domain} added to config", domain.DomainName);
+            }
+            else
+            {
+                _logger.LogWarning("Domain {Domain} already exists in config", domain.DomainName);
+            }
+        }
+
+        public IEnumerable<Domain> GetDomains()
+        {
+            var config = ConfigStore.Load();
+            return config.Domains;
+        }
+
+        public bool RemoveDomain(string domainName)
+        {
+            var config = ConfigStore.Load();
+            var domain = config.Domains.FirstOrDefault(d => d.DomainName.Equals(domainName, StringComparison.OrdinalIgnoreCase));
+
+            if (domain != null)
+            {
+                config.Domains.Remove(domain);
+                ConfigStore.Save(config);
+                _logger.LogInformation("Domain {Domain} removed from config", domainName);
+                return true;
+            }
+
+            _logger.LogWarning("Domain {Domain} not found in config", domainName);
+            return false;
+        }
+
         public async Task<CertificateInfo> GenerateCertificateAsync(Domain domain)
         {
             _logger.LogInformation("Generating certificate for {Domain}", domain.DomainName);

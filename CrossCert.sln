@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI", "CLI\CLI.csproj", "{6637B7A1-5660-46A9-8660-170E3005B3A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{6637B7A1-5660-46A9-8660-170E3005B3A6}.Release|x64.Build.0 = Release|Any CPU
 		{6637B7A1-5660-46A9-8660-170E3005B3A6}.Release|x86.ActiveCfg = Release|Any CPU
 		{6637B7A1-5660-46A9-8660-170E3005B3A6}.Release|x86.Build.0 = Release|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Debug|x64.Build.0 = Debug|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Debug|x86.Build.0 = Debug|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Release|x64.ActiveCfg = Release|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Release|x64.Build.0 = Release|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Release|x86.ActiveCfg = Release|Any CPU
+		{E7F7A2C1-D4B3-485E-B6B8-E251B15B27F1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

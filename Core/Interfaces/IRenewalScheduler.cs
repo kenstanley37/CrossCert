@@ -7,5 +7,7 @@ namespace Core.Interfaces
         Task ScheduleRenewalAsync(Domain domain);
         Task RunManualRenewalAsync();
         event EventHandler<RenewalLog> RenewalCompleted;
+        IEnumerable<RenewalLog> GetRecentLogs();
+        Task RunAutoRenewalAsync();
     }
 }
